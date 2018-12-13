@@ -12,7 +12,6 @@ notifications:
   email: false
 
 script:
-  - yarn test:cover
   - yarn danger ci
 
 after_success:
