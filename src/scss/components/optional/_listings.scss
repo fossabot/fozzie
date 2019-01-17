@@ -344,3 +344,143 @@ $listing--inactive-bg           : rgba($listing-bg, 0.5);
                 }
             }
 }
+
+
+@mixin listingSkeleton() {
+    @keyframes skeletonGradient { 
+        0% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+    .c-listing-skeleton {
+        height: 128px;
+        overflow: hidden;
+        position: relative;
+        padding: spacing(x2);
+        border-bottom: 1px solid $grey--lighter;
+        background: linear-gradient(-45deg, $grey--lighter, $grey--lighter, $grey--mid, $grey--lighter, $grey--lighter);
+	    background-size: 600% 600%;
+	    animation: skeletonGradient 2s ease infinite;
+	    animation-fill-mode: forwards;
+
+        @include media('>mid') {
+            height: 96px;
+        }
+
+        &:before,
+        &:after {
+            content: '';
+            top: 0;
+        }
+
+        &:before {
+            left: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            border: spacing(x2) solid $listing-bg;
+        }
+
+        &:after {
+            height: calc(100% - 8px);
+            position: absolute;
+            border-right: spacing(x2) solid $listing-bg;
+            left: -20px;
+            height: 60px;
+
+            @include media('>mid') {
+                left: 80px;
+                height: 96px;
+            }
+        }
+    }
+
+    .c-listing-skeleton-info {
+        width: 50%;
+        height: 37px;
+        margin-left: 48px;
+        margin-top: 17px;
+        position: relative;
+        border: 12px solid $listing-bg;
+
+        @include media('>mid') {
+            width: 30%;
+            margin-left: 64px;
+        }
+
+        &:before {
+            content: '';
+            top: 0;
+            left: 40%;
+            height: 100%;
+            width: spacing();
+            position: absolute;
+            background: $listing-bg;
+        }
+    }
+
+    .c-listing-skeleton-meta {
+        right: 0;
+        top: 60px;
+        width: 100%;
+        height: 38px;
+        position: absolute;
+        border-top: 12px solid $listing-bg;
+        border-bottom: 12px solid $listing-bg;
+
+        @include media('>mid') {
+            top: 29px;
+            width: 30%;
+        }
+
+        @include media('>wide') {
+            width: 40%;
+        }
+    }
+
+    .c-listing-skeleton-divider {
+
+        &:before,
+        &:after {
+            content: '';
+            height: 30px;
+            position: absolute;
+            background: $listing-bg;
+        }
+        &:before {
+            top: 33px;
+            width: 50%;
+            left: calc(50% + 44px);
+            
+            @include media('>mid') {
+                height: calc(100% - 32px);
+                left: 40%;
+                width: 30%;
+            }
+
+            @include media('>wide') {
+                left: 30%;
+                width: 30%;
+            }
+        }
+
+        &:after {
+            top: 16px;
+            width: 12px;
+            left: 64px;
+
+            @include media('>mid') {
+                width: 20%;
+                height: 30px;
+                left: 50%;
+            }
+
+            @include media('>wide') {
+                width: 10%;
+            }
+        }
+    }
+}
